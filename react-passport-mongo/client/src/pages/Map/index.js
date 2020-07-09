@@ -1,12 +1,12 @@
 import React from 'react'
 import { Map as LeafletMap, Marker, Popup, TileLayer } from 'react-leaflet'
-import iconUrl from './public/logo192.png'
+// import iconUrl from './public/logo192.png'
 import L from 'leaflet'
 
-export const icon= new L.Icon({
-    iconUrl:iconUrl, 
-    iconSize:[25,25]
-})
+// export const icon= new L.Icon({
+//     iconUrl:iconUrl, 
+//     iconSize:[25,25]
+// })
 
 export default function Map(props) {
 
@@ -18,7 +18,9 @@ export default function Map(props) {
                 attribution="<a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={props.position} icon={icon}>
+            <Marker position={props.position} 
+            // icon={icon}
+            >
                 <Popup>Test</Popup>
             </Marker>
         </LeafletMap>
