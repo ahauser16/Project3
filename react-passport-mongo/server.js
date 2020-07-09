@@ -9,11 +9,13 @@ const session = require('express-session');
 const initSession = require('./scripts/initSession');
 
 const errorHandler = require('./scripts/errorHandler');
+const cookieParser = require('cookie-parser')
 
 // middleware:
 // on every requsest will be called in order.
 
 // initialize session memory.
+app.use(cookieParser());
 app.use(initSession(session));
 
 // parse body middleware.
