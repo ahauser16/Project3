@@ -12,6 +12,9 @@ import Map from './pages/Map';
 import { user as userAPI } from "./utils/API";
 import './App.css';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+
 function App() {
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(false);
