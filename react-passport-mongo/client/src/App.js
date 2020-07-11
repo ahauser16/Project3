@@ -10,6 +10,9 @@ import Alert from './components/Alert';
 import Navbar from './containers/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
+import React from 'react'
+
+
 
 import Map from './pages/Map';
 
