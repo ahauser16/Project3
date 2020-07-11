@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch';
+import Settings from './pages/Settings';
 import Alert from './components/Alert';
 import Navbar from './containers/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -63,6 +64,7 @@ function App() {
 						}
 						{...{ user, setUser, setLoading, setAlertInfo }} />
 					<ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } />
+					<ProtectedRoute path="/settings" {...{user, Component: Settings} } />
 					<Route component={NoMatch} />
 				</Switch>
 			</Router>

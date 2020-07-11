@@ -33,7 +33,9 @@ const Navbar = props => {
 				</div>
 			</Link>
 			{ props.user._id 
-				?  <Button theme='dark' onClick={signout}><i className='fa fa-sign-out fa-1x' aria-hidden='true'></i></Button>
+				?  <Button theme='dark' onClick={signout}><i className='fa fa-sign-out fa-1x' aria-hidden='true'></i></Button> 
+					&& <Link to ='/settings'><Button theme='dark'>Settings</Button></Link>
+				
 				:  location.pathname === '/signup' 
 					? 	<Link to='/login'><Button>login</Button></Link>
 					:  <Link to='/signup'><Button theme='primary'>Signup</Button></Link>
