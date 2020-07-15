@@ -1,0 +1,5 @@
+
+export const myEnvVars = {
+    TRAVELTIMEAPPID:  '1baa8293',
+    TRAVELTIMEAPIKEY:  '673904be9995f26ff865ba0e17469222'
+}
