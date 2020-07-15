@@ -9,7 +9,7 @@ module.exports = {
       
       //validate request
 		if (req.body.email && req.body.password) {
-			console.log(req.body.email, req.body.password);
+			console.log(req.body.email, req.body.password, req.body.name);
 			db.User.authenticate(req.body.email, req.body.password, function (error, user) {
             
             // check error (including no user)
@@ -42,6 +42,7 @@ module.exports = {
    
       // create user in db
       db.User.create({
+         name: req.body.name,
          email: req.body.email,
          password: req.body.password
       })

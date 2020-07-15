@@ -2,25 +2,24 @@
 // const dogCont = require("../controllers/dogController");
 
 // // html route to get all dogs of the logged in user
-// router.route("/dogs").get(dogCont.findAll())
+// router.route("/dogs").get(dogCont.findAll({owner: LoggedinUser}))
 //     .post(dogCont.create);
-
-// router.route("/dogs/add").post(dogCont.create);
 
 // router.route("/dogs/:id").put(dogCont.update)
 //     .delete(dogCont.remove);
-
-    
 
 // module.exports = router;
 
 
 const router = require("express").Router();
-let Dog = require("../../models/Dogs");
+let Dog = require("../../../../models/Dogs");
 
+router.route('/dogs').get((req, res) => {
+    Dog.find().then(dogs => res.json(dogs))
+        .catch(err => res.status(400).json('Error:' + err));
+});
 
-
-router.route('/add').post((req, res) => {
+router.route('/dogs/add').post((req, res) => {
     console.log('test1')
     const dogname = req.body.dogname;
     const breed = req.body.breed;
@@ -35,12 +34,12 @@ router.route('/add').post((req, res) => {
         weight,
         description
     });
-    console.log('test2')
+    console.log('test');
     newDog.save().then(() => res.json('Dog added'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route('/dogs/update/:id').post((req, res) => {
     Dog.findById(req.params.id).then(dog => {
         dog.dogname = req.body.dogname;
         dog.breed = req.body.breed;
@@ -54,14 +53,9 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err))
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/dogs/:id').delete((req, res) => {
     Dog.findByIdAndDelete(req.params.id).then(() => res.json('Dog removed'))
         .catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/').get((req, res) => {
-    Dog.find().then(dogs => res.json(dogs))
-        .catch(err => res.status(400).json('Error:' + err));
 });
 
 module.exports = router;

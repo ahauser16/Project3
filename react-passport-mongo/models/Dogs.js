@@ -10,6 +10,9 @@ const DogsSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    description: {
+        type: String
+    },
     // picture: {
     //     type: Image
     // },

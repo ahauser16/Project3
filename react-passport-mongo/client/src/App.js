@@ -11,6 +11,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
 import Map from './pages/Map';
 import { user as userAPI } from "./utils/API";
+import { dog as dogAPI } from "./utils/API";
 import './App.css';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -20,6 +21,7 @@ function App() {
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [alertInfo, setAlertInfo] = useState({message:"", theme:"success"});
+	const [dog, setDog] = useState({});
 
    useEffect(() => {
 		// no catch, add if you want to check for it.
@@ -64,7 +66,10 @@ function App() {
 						}
 						{...{ user, setUser, setLoading, setAlertInfo }} />
 					<ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } />
-					<ProtectedRoute path="/settings" {...{user, Component: Settings} } />
+					<Route path="/settings">
+						<Settings {...{user, dog, setDog }}/>
+					</Route>
+					{/* <Route path="/"/> */}
 					<Route component={NoMatch} />
 				</Switch>
 			</Router>

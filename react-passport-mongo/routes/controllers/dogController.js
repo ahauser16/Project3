@@ -1,8 +1,9 @@
 const db = require("../../models");
 
+
 module.exports = {
     findAll: function(req, res) {
-        db.Dog.findAll({'owner':'loggedinUser' }).then(dbModel => res.json(dbModel))
+        db.Dog.findAll().then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err))
     },
     create: function(req, res){
