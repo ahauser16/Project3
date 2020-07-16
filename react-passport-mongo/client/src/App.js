@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Content from './components/TravelTimeRouteCall/TravelTimeRouteCall'
-// import Home from './pages/Home';
-// import Maptest from './pages/Maptest';
+import Map from './pages/Map/Map';
+//==================================================================================
+import { user as userAPI } from "./utils/API";
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch';
@@ -10,23 +10,21 @@ import Alert from './components/Alert';
 import Navbar from './containers/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
+// import Home from './pages/Home';
+//==================================================================================
+import TravelTimeRouteCall from './components/TravelTimeRouteCall/TravelTimeRouteCall'
+// import TravelTimeRadiusCall from './components/TravelTimeRadiusCall/TravelTimeRadiusCall'
 
-//Map contains the geolocation method that finds the user's position
-import Map from './pages/Map/Map';
-// import RouteArray from './components/RouteArray/RouteArray';
-import { user as userAPI } from "./utils/API";
+//===================================================================================
 import './App.css';
 
+//====================================================================================
+
+// import RouteArray from './components/RouteArray/RouteArray';
+
+
+
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-
-
-
-
-
-
-
-
 
 function App() {
 	//================================================
@@ -41,9 +39,6 @@ function App() {
 			.then(res => res.data ? setUser(res.data) : 0);
 	}, []);
 	//================================================
-
-
-
 
 	return (
 		<>
@@ -69,8 +64,12 @@ function App() {
 					/>
 					<Route
 						path='/traveltime'
-						component={Content}
+						component={TravelTimeRouteCall}
 					/>
+					{/* <Route
+						path='/traveltime'
+						component={TravelTimeRadiusCall}
+					/> */}
 					<Route
 						exact
 						path='/signup'
@@ -99,8 +98,11 @@ function App() {
 			}
 
 			<TravelTimeRouteCall />
-			{/* <RouteArray /> */}
+
+			{/* <TravelTimeRadiusCall /> */}
+
 		</>
 	);
 }
+
 export default App;

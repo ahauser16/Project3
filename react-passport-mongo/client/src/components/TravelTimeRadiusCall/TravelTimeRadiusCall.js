@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { myEnvVars } from '../../env';
 
-//THIS COMPONENT MAKES THE POST REQUEST TO TRAVELTIME API AND EXPECTS DIRECTIONS, DISTANCE TRAVELED, TIME TRAVELED AND COORDS FROM START TO FINISH INCLUDING ANY CHANGE IN DIRECTION IN BETWEEN.
+
+//https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422
+//The HyperText Transfer Protocol (HTTP) 422 Unprocessable Entity response status code indicates that the server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
+
+
+
 
 function getDateString() {
     let d = new Date();
@@ -10,41 +15,42 @@ function getDateString() {
 }
 
 export default function TravelTimeRadiusCall() {
-    
+
     const [posts, setPosts] = useState([]);
 
-    const myTravelData = {
-        "locations": [
+    const myTimeRadius = {
+        "departure_searches": [
             {
-                "id": "home",
+                "id": "from home",
                 "coords": {
-                    //ISSUE: cannot properly reference geolocation.  How would you reference lat&lng here as the values in Map.js-lines 21&22                    
-                    "lat": departureLatLng.lat,
-                    "lng": departureLatLng.lng
-                }
-            },
-        ],
-        "departure_searches": [{
-            "id": "WhereWoof",
-            "departure_location_id": "home",
-            "arrival_location_ids": [],
-            "transportation": { "type": "walking" },
-            "departure_time": getDateString(),
-            "properties": ["travel_time", "distance", "route"]
-        }]
-    };
-
-    arrivalLatLngs.forEach((point, index) => {
-        let id = "arrival" + index;
-        data.locations.push({
-            "id": id,
-            "coords": {
-                "lat": point.lat,
-                "lng": point.lng
+                    "lat": 40.6487128,
+                    "lng": -73.9673123
+                },
+                "transportation": {
+                    "type": "walking"
+                },
+                "travel_time": 900
             }
-        });
-        data.departure_searches[0].arrival_location_ids.push(id);
-    });
+        ],
+        "arrival_searches": [
+            {
+                "id": "to destination",
+                "coords": {
+                    "lat": 40.6502422,
+                    "lng": -73.9660536
+                },
+                "transportation": {
+                    "type": "walking"
+                },
+                "arrival_time": getDateString(),
+                "travel_time": 900,
+                "range": {
+                    "enabled": true,
+                    "width": 3600
+                }
+            }
+        ]
+    };
 
     async function fetchData(url, data, params) {
         const response = await axios.post(url, data, params);
@@ -52,7 +58,6 @@ export default function TravelTimeRadiusCall() {
         return response.data.results
     }
 
-    //DRAWROUTE FUNCTION WOULD RUN AT THIS POINT
 
     useEffect(() => {
         let url = 'https://api.traveltimeapp.com/v4/time-map'
@@ -66,26 +71,23 @@ export default function TravelTimeRadiusCall() {
         }
 
         // commented out below to avoid unnecessary api calls
-
-        // const travelData = fetchData(url, myTravelData, params);
-        // console.log(travelData)
+        //============================================================================
+        // const travelData = fetchData(url, myTimeRadius, params);
+        // // console.log(myTimeRadius)
         // travelData.then((res) => {
-        //     console.log(res);
+        //     // console.log(res);
         //     setPosts((posts) => {
         //         return [...posts, ...res]
         //     })
         // })
-
+        //===========================================================================
         // commented out above to avoid unnecessary api calls
 
     }, [])
 
-
-
-
     return (
         <div>
-            {/* { JSON.stringify(posts)} */}
+            {JSON.stringify(posts)}
         </div>
     )
 }

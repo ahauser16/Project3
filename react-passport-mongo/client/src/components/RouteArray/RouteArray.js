@@ -7,7 +7,7 @@ import { Renderer } from 'leaflet';
 
 export default function RouteArray(props) {
 
-    const [route, updateRoute] = useState([])
+    const [route, setRoute] = useState([])
 
     //this useEffect is a copy of the geolocation code in Map.js.
     //D.R.Y. how can you get this value

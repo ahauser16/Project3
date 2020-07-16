@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { myEnvVars } from '../../env';
 
-//THIS COMPONENT MAKES THE POST REQUEST TO TRAVELTIME API AND EXPECTS DIRECTIONS, DISTANCE TRAVELED, TIME TRAVELED AND COORDS FROM START TO FINISH INCLUDING ANY CHANGE IN DIRECTION IN BETWEEN.
 
 function getDateString() {
     let d = new Date();
     return d.toISOString();
 }
+
+
+//THIS COMPONENT MAKES THE POST REQUEST TO TRAVELTIME API AND EXPECTS DIRECTIONS, DISTANCE TRAVELED, TIME TRAVELED AND COORDS FROM START TO FINISH INCLUDING ANY CHANGE IN DIRECTION IN BETWEEN.
+
 
 
 //Step1 - retrieve user coords and update user's position on map
@@ -31,8 +34,10 @@ function getDateString() {
 //step 6 - use L.polyline method to drawroute on map 
 //INCOMPLETE
 
-export default function TravelTimeRouteCall() {
+export default function TravelTimeRouteCall(position) {
     
+
+
     const [posts, setPosts] = useState([]);
 
     const myTravelData = {
@@ -41,8 +46,8 @@ export default function TravelTimeRouteCall() {
                 "id": "home",
                 "coords": {
                     //ISSUE: cannot properly reference geolocation.  How would you reference lat&lng here as the values in Map.js-lines 21&22                    
-                    "lat": departureLatLng.lat,
-                    "lng": departureLatLng.lng
+                    "lat": position.lat,
+                    "lng": position.lng
                 }
             },
         ],
@@ -55,18 +60,25 @@ export default function TravelTimeRouteCall() {
             "properties": ["travel_time", "distance", "route"]
         }]
     };
+//===================new code below===================
+    // arrivalLatLngs.forEach((point, index) => {
+    //     let id = "arrival" + index;
+    //     data.locations.push({
+    //         "id": id,
+    //         "coords": {
+    //             "lat": point.lat,
+    //             "lng": point.lng
+    //         }
+    //     });
+    //     data.departure_searches[0].arrival_location_ids.push(id);
+    // });
+//===================new code above======================
+//Notes:
+//make a) starting position state
+//make b) current position state (a link list)
+//=======================================================
+//===================old code below======================
 
-    arrivalLatLngs.forEach((point, index) => {
-        let id = "arrival" + index;
-        data.locations.push({
-            "id": id,
-            "coords": {
-                "lat": point.lat,
-                "lng": point.lng
-            }
-        });
-        data.departure_searches[0].arrival_location_ids.push(id);
-    });
 
     async function fetchData(url, data, params) {
         const response = await axios.post(url, data, params);
@@ -89,25 +101,22 @@ export default function TravelTimeRouteCall() {
 
         // commented out below to avoid unnecessary api calls
 
-        // const travelData = fetchData(url, myTravelData, params);
-        // console.log(travelData)
-        // travelData.then((res) => {
-        //     console.log(res);
-        //     setPosts((posts) => {
-        //         return [...posts, ...res]
-        //     })
-        // })
+        const travelData = fetchData(url, myTravelData, params);
+        console.log(travelData)
+        travelData.then((res) => {
+            console.log(res);
+            setPosts((posts) => {
+                return [...posts, ...res]
+            })
+        })
 
         // commented out above to avoid unnecessary api calls
 
     }, [])
 
-
-
-
     return (
         <div>
-            {/* { JSON.stringify(posts)} */}
+            { JSON.stringify(posts)}
         </div>
     )
 }
