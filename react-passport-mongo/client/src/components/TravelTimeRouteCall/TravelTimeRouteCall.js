@@ -35,8 +35,9 @@ function getDateString() {
 //INCOMPLETE
 
 export default function TravelTimeRouteCall(position) {
-    
 
+console.log(position.lat);
+console.log(position.lng)
 
     const [posts, setPosts] = useState([]);
 
@@ -60,7 +61,7 @@ export default function TravelTimeRouteCall(position) {
             "properties": ["travel_time", "distance", "route"]
         }]
     };
-//===================new code below===================
+    //===================new code below===================
     // arrivalLatLngs.forEach((point, index) => {
     //     let id = "arrival" + index;
     //     data.locations.push({
@@ -72,12 +73,12 @@ export default function TravelTimeRouteCall(position) {
     //     });
     //     data.departure_searches[0].arrival_location_ids.push(id);
     // });
-//===================new code above======================
-//Notes:
-//make a) starting position state
-//make b) current position state (a link list)
-//=======================================================
-//===================old code below======================
+    //===================new code above======================
+    //Notes:
+    //make a) starting position state
+    //make b) current position state (a link list)
+    //=======================================================
+    //===================old code below======================
 
 
     async function fetchData(url, data, params) {
@@ -101,14 +102,14 @@ export default function TravelTimeRouteCall(position) {
 
         // commented out below to avoid unnecessary api calls
 
-        const travelData = fetchData(url, myTravelData, params);
-        console.log(travelData)
-        travelData.then((res) => {
-            console.log(res);
-            setPosts((posts) => {
-                return [...posts, ...res]
-            })
-        })
+        // const travelData = fetchData(url, myTravelData, params);
+        // console.log(travelData)
+        // travelData.then((res) => {
+        //     console.log(res);
+        //     setPosts((posts) => {
+        //         return [...posts, ...res]
+        //     })
+        // })
 
         // commented out above to avoid unnecessary api calls
 
@@ -116,7 +117,7 @@ export default function TravelTimeRouteCall(position) {
 
     return (
         <div>
-            { JSON.stringify(posts)}
+            {/* {JSON.stringify(posts)} */}
         </div>
     )
 }

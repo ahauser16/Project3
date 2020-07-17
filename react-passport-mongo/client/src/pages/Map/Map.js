@@ -30,7 +30,13 @@ export default function Map(props) {
     )
 
     function handleClick(e) {
-        var myRoute = GetRoute(e.latlng).then(res => res.json()).then(res => console.log(res))
+
+        
+        var myRoute = GetRoute(e.latlng)
+        .then(res => res.json())
+        // .then(res => console.log(res.results[0].locations[0].properties[0].route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj))))
+        .then(res => console.log(res))
+
         // let properties = serverJson.results[0].locations[0].properties[0],
     //     routeArray = properties.route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj));
     //     console.log(routeArray);
@@ -41,13 +47,6 @@ export default function Map(props) {
     //     .openPopup();
     
     }
-
-
-
-
-
-
-
 
     return (
         //step3-load the map, tilelayer and setview
