@@ -66,8 +66,16 @@ function App() {
 						}
 						{...{ user, setUser, setLoading, setAlertInfo }} />
 					<ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } />
-					<Route path="/settings">
-						<Settings {...{user, dog, setDog }}/>
+					<Route path="/settings"
+						render={props =>
+						<Settings 
+							{...props}
+							user={user}
+							setUser={setUser}
+							dog={dog}
+							setDog={setDog}
+							/>
+							}>
 					</Route>
 					{/* <Route path="/"/> */}
 					<Route component={NoMatch} />

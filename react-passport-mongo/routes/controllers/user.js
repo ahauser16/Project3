@@ -1,6 +1,9 @@
 // get reference to DB 
 const db = require('../../models');
 const passport = require('passport');
+const { User } = require('../../models');
+
+// const { dog } = require('../../client/src/utils/API');
 
 module.exports = {
 
@@ -9,25 +12,27 @@ module.exports = {
       
       //validate request
 		if (req.body.email && req.body.password) {
-			console.log(req.body.email, req.body.password, req.body.name);
-			db.User.authenticate(req.body.email, req.body.password, function (error, user) {
+			console.log(req.body.email, req.body.password);
+         db.User.authenticate(req.body.email, req.body.password, function (err, user){
             
             // check error (including no user)
-            if (error || !user) {
+            if (err || !user) {
                const err =  new Error('incorrect credentials, no user found')
                next(err)
 
-            // user found
+            // user found 
 				} else {
                console.log(`login: `, user._id);
                
                // save user to session to match on login
                req.session.user = user;
                //
-					req.user = user;
+               req.user = user;
+               
 					return res.json(user);
 				}
-         });
+         })
+         // .catch(error => next (error));
 
       // request missing fields
 		} else {
@@ -38,10 +43,10 @@ module.exports = {
    },
 
    // signup user
-   create: (req, res) => {
+   create: async (req, res) => {
    
       // create user in db
-      db.User.create({
+      const user = db.User.create({
          name: req.body.name,
          email: req.body.email,
          password: req.body.password
@@ -53,6 +58,17 @@ module.exports = {
          console.log(err.message)
          res.status(401).json(err.message)
       });
+   },
+
+   find: async(req, res) => {
+      const user = await User.find()
+      return res.send(user)
+   },
+
+   userDogs: async(req, res) => {
+      const user = await User.findById(req.params)
+         .populate('dogname')
+      res.send(user.dogname)
    },
       
    signout: (req, res) => {

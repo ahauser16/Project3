@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const DogsSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "UserSchema"
+        ref: "User"
     },
     dogname: {
         type: String,
@@ -14,7 +14,8 @@ const DogsSchema = new mongoose.Schema({
         type: String
     },
     // picture: {
-    //     type: Image
+    //     data: Buffer,
+    //     contentType: String
     // },
     breed: {
         type: String,
