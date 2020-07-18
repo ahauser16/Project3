@@ -42,14 +42,14 @@ class Login extends Component {
 						this.props.setUser(res.data);
 					}
 				})
-				.catch(err => {
-					this.props.setLoading(false);
-					console.warn(err.response.data);
-					this.props.setAlertInfo({
-						theme: 'warning',
-						message: err.response.data
-					});
-				});
+				// .catch(err => {
+				// 	this.props.setLoading(false);
+				// 	console.warn(err.response.data);
+				// 	this.props.setAlertInfo({
+				// 		theme: 'warning',
+				// 		message: err.response.data
+				// 	});
+				// });
 		}
 	};
 
