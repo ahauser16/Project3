@@ -3,6 +3,8 @@ import { Container } from '../../components/Grid';
 import Toggle from '../../components/ToggleShow/toggle';
 import Adddog from '../../components/AddDogForm/addDogForm';
 import { user } from '../../utils/API';
+import { Button } from '../../components/Button';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
@@ -22,7 +24,7 @@ export default (props) => {
 							<Adddog {...props}/>
 						</Toggle></button></li>
 						<li className='list-group-item'><button>Edit Dog Profile</button></li>
-						<li className='list-group-item'><button>Other Settings?</button></li>
+						<Link to ='/dogprofiles'><Button theme='dark'>Dog Profile</Button></Link>
 					</ul> 
 					
 				</div>

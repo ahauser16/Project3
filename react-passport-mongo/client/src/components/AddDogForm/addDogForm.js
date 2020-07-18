@@ -66,7 +66,7 @@ export default class Adddog extends Component {
             age: this.state.age,
             sex: this.state.sex,
             weight: this.state.weight,
-            picture: this.state.picture,
+            // picture: this.state.picture,
             description: this.state.description
         })
 
@@ -76,6 +76,7 @@ export default class Adddog extends Component {
                 this.props.setDog(res.data);
                 this.props.setUser(res.data);
                 console.log(res.data.dogname);
+                return;
             }
         })
         .catch(err => {
