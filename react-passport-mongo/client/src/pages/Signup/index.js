@@ -11,7 +11,7 @@ class Signup extends Component {
 		super(props);
 		this.state = {
 			email: '',
-			username: '',
+			name: '',
 			password: '',
 			passwordConf: ''
 		};
@@ -47,7 +47,7 @@ class Signup extends Component {
     // if good to go
 		userAPI
 				.signup({
-					username: this.state.username.trim(),
+					name: this.state.name.trim(),
 					email: this.state.email.trim(),
 					password: this.state.password.trim(),
 					passwordConf: this.state.passwordConf.trim()
@@ -81,10 +81,10 @@ class Signup extends Component {
 						<Card title='Signup'>
 							<form className={styles.form} onSubmit={this.handleFormSubmit}>
 								<Input
-									value={this.state.username}
+									value={this.state.name}
 									onChange={this.handleInputChange}
-									name='username'
-									placeholder='username (required)'
+									name='name'
+									placeholder='name (required)'
 								/>
 								<Input
 									value={this.state.email}

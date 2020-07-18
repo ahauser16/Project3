@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
 
 var UserSchema = new mongoose.Schema({
   email: {
@@ -11,7 +12,13 @@ var UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  dogname: [{type: Schema.Types.ObjectId, ref:'Dog'}]
+  
 });
 
 //hashing a password before saving it to the database
@@ -29,19 +36,24 @@ UserSchema.pre('save', function (next) {
 //authenticate input against database
 UserSchema.statics.authenticate = function (email, password, callback) {
   User.findOne({ email: email })
+    .populate("dogname")
     .exec(function (err, user) {
+      console.log("User: " + user);
       if (err) {
-        return callback(err)
+        callback(err);
       } else if (!user) {
         var err = new Error('User not found.');
         err.status = 401;
-        return callback(err);
+        callback(err);
       }
+      console.log(password)
+      console.log(user.password)
       bcrypt.compare(password, user.password, function (err, result) {
-        
-        if(err) throw err;
-
+        console.log(err)
+        if(err) callback(err);
+        console.log(result)
         if (result === true) {
+          console.log(user);
           return callback(null, user);
         } else {
           return callback();

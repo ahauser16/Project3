@@ -3,16 +3,23 @@ const mongoose = require("mongoose");
 const DogsSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "UserSchema"
+        ref: "User"
     },
     dogname: {
         type: String,
         trim: true,
         required: true
     },
+    description: {
+        type: String
+    },
     // picture: {
-    //     type: Image
+    //     data: Buffer,
+    //     contentType: String
     // },
+    age: {
+        type: Number,
+    },
     breed: {
         type: String,
         trim: true

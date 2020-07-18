@@ -9,6 +9,11 @@ export default {
     return axios.post("/api/user/signup", user)
   },
   authenticate: () => axios.get("/api/user/authenticate"),
-  signout: () => axios.get("/api/user/signout")
-
+  signout: () => axios.get("/api/user/signout"),
+  find: function (user) {
+    return axios.get("/api/user/find", user)
+  },
+  userDogs: function (user){
+    return axios.get("/api/user/dogs", user)
+  }
 };
