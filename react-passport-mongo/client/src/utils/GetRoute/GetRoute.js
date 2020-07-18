@@ -1,13 +1,13 @@
 import { myEnvVars } from '../../env';
 
-//exports the TTR api response.
+let jsondata;
 
 function getDateString() {
     let d = new Date();
     return d.toISOString();
 }
 
-export default function GetRoute(position) {
+export default function GetRoute(position1, position2) {
     const apiKey = myEnvVars.TRAVELTIMEAPPID;
     const appid = myEnvVars.TRAVELTIMEAPIKEY
 
@@ -20,34 +20,35 @@ export default function GetRoute(position) {
 
     });
     const headers2 = {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'X-Application-Id': myEnvVars.TRAVELTIMEAPPID,
-        'X-Api-Key': myEnvVars.TRAVELTIMEAPIKEY
+        "Host": "api.traveltimeapp.com",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-Application-Id": myEnvVars.TRAVELTIMEAPPID,
+        "X-Api-Key": myEnvVars.TRAVELTIMEAPIKEY
     };
 
     const data = {
         "locations": [
             {
-                "id": "home",
+                "id": "current position",
                 "coords": {
-                    "lat": position.lat,
-                    "lng": position.lng
+                    "lat": position1.lat,
+                    "lng": position1.lng
                 }
             },
             {
-                "id": "away",
+                "id": "next position",
                 "coords": {
-                    "lat": 40.706669,
-                    "lng": -74.009528
+                    "lat": position2.lat,
+                    "lng": position2.lng
                 }
             }
         ],
         "departure_searches": [{
             "id": "exampleSearchA",
-            "departure_location_id": "home",
+            "departure_location_id": "current position",
             "arrival_location_ids": [
-                "away"
+                "next position"
             ],
             "transportation": {
                 "type": "walking"
@@ -66,7 +67,9 @@ export default function GetRoute(position) {
         method: "POST",
         headers: headers2,
         body: JSON.stringify(data)
-    }).catch(console.error)
-        .then(response => response.json())
-        .then(data => console.log(data));
+    })
+   
+
+
 }
+//===============END OF GET ROUTE POST REQUEST=========================
