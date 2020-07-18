@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <title>Leaflet with Geolocation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <style>
+
+    </style>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            /*************************************************************/
+
+            var map, deviceCoords;
+
+            // var theMarker = {};
+
+            navigator.geolocation.getCurrentPosition(leafletInit);
+
+            function leafletInit(location) {
+                let coords = [location.coords.latitude, location.coords.longitude];
+                deviceCoords = {
+                    lat: coords[0],
+                    lng: coords[1]
+                };
+
+                map = L.map("map")
+                    .setView(coords, 20);
+
+                //======================================================
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    {
+                        attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+
+                        //https://leafletjs.com/reference-1.6.0.html#tilelayer-l-tilelayer
+
+                    }
+                ).addTo(map);
+                //========================================================================
+
+                var shepardIcon = L.icon({
+                    iconUrl: 'icons/Favorites (2)/german-shepherd-50.png',
+                    shadowUrl: 'leaf-shadow.png',
+
+                    iconSize: [50, 50], // size of the icon
+                    shadowSize: [50, 64], // size of the shadow
+                    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+                    shadowAnchor: [4, 62],  // the same for the shadow
+                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                });
+
+                var shepard = L.marker(coords,
+                    {
+                        // icon: shepardIcon,
+                        title: 'BigDog',
+                        opacity: 1.0,
+                        // bubblingMouseEvents: false,
+                        //========================================================
+                        //after being dragged from its initial starting point, when the user clicks on a new point on the map the 
+                        //***drawRoute function doesn't update to the new dragged point.***  
+
+                        //in the EVENT the marker is moved then it fires when the marker is moved via setLatLng or by dragging. 
+                        //***Old and new coordinates are included in event arguments as oldLatLng, latlng.***
+
+                        draggable: true,
+                        //====================================================================================================================
+                        //DRAGGING EVENT    DATA        DESCRIPTION
+                        //dragstart         Event       Fired when the user starts dragging the marker.
+                        //movestart         Event       Fired when the marker starts moving (because of dragging).
+                        //drag              Event       Fired repeatedly while the user drags the marker.
+                        //dragend           Event       Fired when the user stops dragging the marker.
+                        //moveend           Event       Fired when the marker stops moving (because of dragging).
+                        //====================================================================================================================
+                        //METHODS           RETURNS                                             DESCRIPTION
+                        //getLatLng()       LatLng e.g. var laglng = L.lagLng(50.5, 30.5);      Returns the current geographical position of the marker.
+
+                        //setLatLng()       this                                                Changes the marker position to the given point.
+                        //setZIndexOffset() this                                                Changes the zIndex offset of the marker.
+                        //getIcon()         Icon e.g. png file                                  Returns the current icon used by the marker
+                        //setIcon()         this                                                Changes the marker icon.
+                        //setOpacity        this                                                Changes the opacity of the marker.    
+                        //toGeoJSON***      object                                              precision is the number of decimal places for coordinates. The default value is 6 places. Returns a GeoJSON representation of the marker (as a GeoJSON Point Feature).
+                        //=======================================================================================================================
+                        //==========================================================
+                        // autoPan: true,                      //Whether to pan the map when dragging this marker near its edge or not.
+                        // autoPanPadding: Point(50,50),       //Distance (in pixels to the left/right and to the top/bottom) of the map edge to start panning the map.
+                        // autoPanSpeed:10,        //Number of pixels the map should pan by.
+
+                    }
+                ).addTo(map)
+
+                    .bindPopup("You are here.")
+                    .openPopup();
+
+                //==============================================================
+                //Every time something happens in Leaflet, e.g. user clicks on a marker or map zoom changes, the corresponding object sends an event which you can subscribe to with a function.
+
+                map.on("click", handleMapClick);
+            }
+
+            function handleMapClick(e) {
+                // if (theMarker != undefined) {
+                //     theMarker.remove();
+                //     console.log("marker");
+                // };
+
+
+                getRoute(deviceCoords, e.latlng);
+            }
+            //----
+
+
+            //Each object has its own set of events — see documentation for details. The first argument of the listener function is an event object — it contains useful information about the event that happened. For example, map click event object (e in the example above) has latlng property which is a location at which the click occurred.
+            //================================================================
+            //travel time app below
+            //the response from travelTime contains the directions and the distance between coordinates whenever there is a change in the directions (e.g. from lat:x lng:y walk NW 200 feet until lat:x+d lng+d then walk West 15 feet ).
+
+            //The getRoute function below will have to rewritten to for react.js and axios.
+            //================================================================
+
+            function getRoute(departureLatLng, arrivalLatLng) {
+                const apiKey = "60cf6646c39e45a0de83a59baa00a57d";
+                const appid = "dfc45614";
+                const headers = new Headers({
+                    "Host": "api.traveltimeapp.com",
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Application-Id": appid,
+                    "X-Api-Key": apiKey
+                });
+                const data = {
+                    "locations": [
+                        {
+                            "id": "departure",
+                            "coords": {
+                                "lat": departureLatLng.lat,
+                                "lng": departureLatLng.lng
+                            }
+                        },
+                        {
+                            "id": "arrival",
+                            "coords": {
+                                "lat": arrivalLatLng.lat,
+                                "lng": arrivalLatLng.lng
+                            }
+                        }
+                    ],
+
+                    "departure_searches": [{
+                        "id": "facewoof",
+                        "departure_location_id": "departure",
+                        "arrival_location_ids": [
+                            "arrival"
+                        ],
+                        "transportation": { "type": "walking" },
+                        "departure_time": getDateString(),
+                        "properties": ["travel_time", "distance", "route"]
+                    }]
+                };
+                fetch("https://api.traveltimeapp.com/v4/routes", {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify(data),
+                }).then(res => res.json()).then(drawRoute).catch(console.error);
+            }
+
+
+
+
+
+            function drawRoute(serverJson) {
+                console.log(serverJson);
+                let properties = serverJson.results[0].locations[0].properties[0],
+                    travelTime = properties.travel_time,
+                    distance = properties.distance,
+                    arrivalTime = properties.route.arrival_time,
+                    departureTime = properties.route.departure_time,
+                    instructionsArray = properties.route.parts.map(route => route.directions),
+                    distanceArray = properties.route.parts.map(route => route.distance),
+                    travelTimeArray = properties.route.parts.map(route => route.travel_time),
+                    directionArray = properties.route.parts.map(route => route.direction),
+                    //==================================================================================================
+                    // create a red polyline from an array of LatLng points
+                    // var latlngs = [
+                    //     [45.51, -122.68],
+                    //     [37.77, -122.43],
+                    //     [34.04, -118.2]
+                    // ];
+                    // var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+                    // zoom the map to the polyline
+                    // map.fitBounds(polyline.getBounds());
+                    //===================================================================================================
+
+                    //every search has a search ID so we need an init() that allows any user 
+                    //targets the traveltime response which has: LatLng of starting point and destination, arrival time, total distance and parts.  We tell the user right away the total distance (miles) and travel_time(arrival_time).  If the user wants they can press a button and get detailed directions. 
+
+                    //For each search we want to create variables for:
+
+                    //travel_time
+                    //total distance
+                    //parts:
+                    ////2 coords: A --> B with direction(s), distance, id:0, mode: "walk", travel_time for each.
+                    ////This means it's possible to convert each "part" (or every other part) into a Marker/Icon.
+                    ////You can send someone a destination with all the relative info above via websocket.
+                    //
+
+
+                    routeArray = properties.route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj)),
+
+                    polyline = L.polyline(routeArray, { color: "red" }).addTo(map);
+                map.fitBounds(polyline.getBounds());
+
+                theMarker = L.marker(routeArray[routeArray.length - 1]).addTo(map)
+
+                L.marker(routeArray[routeArray.length - 1]).addTo(map)
+                    .bindPopup(`Travel Time: ${travelTime}<br>Distance: ${distance}`)
+                    .openPopup();
+            }
+
+            function getDateString() {
+                let d = new Date();
+                return d.toISOString();
+            }
+            //========================================================================
+            //L.Control
+            //To make a control, simply inherit from L.Control and implement onAdd() and onRemove(). These methods work in a similar way to their L.Layer counterparts (they run whenever the control is added to or removed from the map), except that onAdd() must return an instance of HTMLElement representing the control. Adding the element to the map is done automatically, and so is removing it.
+
+            /*************************************************************/
+        });
+    </script>
+</head>
+
+<body>
+
+
+
+
+
+
+    <div id="map"></div>
+
+
+
+</body>
+
+
+
+</html>

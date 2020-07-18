@@ -37,8 +37,11 @@
     "if-env": "^1.0.4",
     "ignore-styles": "^5.0.1",
     "jest": "24.9.0",
+    "leaflet": "^1.6.0",
     "mongoose": "^5.9.20",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "react-leaflet": "^2.7.0",
+    "react-leaflet-fullscreen": "^1.0.1"
   },
   "engines": {
     "node": "12.x"
