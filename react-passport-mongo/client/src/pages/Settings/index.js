@@ -2,13 +2,14 @@ import React  from 'react';
 import { Container } from '../../components/Grid';
 import Toggle from '../../components/ToggleShow/toggle';
 import Adddog from '../../components/AddDogForm/addDogForm';
+import { user } from '../../utils/API';
 
 
 
 export default (props) => {
 	return (
 		<Container>
-			
+			{console.log(props.dog)}
 			<div className='card' style={{ width: '18rem' }}>
 					<img className='card-img-top' alt='Dog Profile Image'></img>
 					<div className='card-body'>

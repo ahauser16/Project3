@@ -11,8 +11,8 @@ import Alert from './components/Alert';
 import Navbar from './containers/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
-import Map from './pages/Map';
-import { user as userAPI } from "./utils/API";
+// import Map from './pages/Map';
+// import { user as userAPI } from "./utils/API";
 import { dog as dogAPI } from "./utils/API";
 // import Home from './pages/Home';
 //==================================================================================
@@ -20,6 +20,7 @@ import TravelTimeRouteCall from './components/TravelTimeRouteCall/TravelTimeRout
 
 //===================================================================================
 import './App.css';
+import DogProfiles from './pages/DogProfiles';
 
 //====================================================================================
 
@@ -87,7 +88,7 @@ function App() {
 							/>
 						}
 						{...{ user, setUser, setLoading, setAlertInfo }} />
-					<ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } />
+					{/* <ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } /> */}
 					<Route path="/settings"
 						render={props =>
 						<Settings 
@@ -102,7 +103,19 @@ function App() {
 					{/* <Route path="/"/> */}
 					{/* <ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } /> */}
 
-					<Route exact path="/home" component={Map} />
+					<Route exact path="/home" 
+						component={Map} 
+					/>
+					<Route 
+						exact path = "/dogprofiles"
+						render ={props =>
+							<DogProfiles 
+								{...props}
+								user={user}
+								dog={dog}
+								/>
+						}
+					/>
 
 					<Route component={NoMatch} />
 

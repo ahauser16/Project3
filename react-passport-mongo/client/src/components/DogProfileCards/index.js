@@ -8,13 +8,13 @@ function DogProfileCards(props) {
                 <img src='https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/03173132/Australian-Shepherd.1.jpg'></img>
             </div>
             <div class='card_right'>
-                <h1>Max</h1>
+                <h1>{props.user.dogname[0].dogname}</h1>
                 <div class='card_right__details'>
                     <ul>
-                        <li>Breed</li>
-                        <li>Age</li>
-                        <li>Gender</li>
-                        <li>Weight</li>
+                        <li>{props.user.dogname[0].breed}</li>
+                        <li>{props.user.dogname[0].age}</li>
+                        <li>{props.user.dogname[0].sex}</li>
+                        <li>{props.user.dogname[0].weight}</li>
                     </ul>
                     <div class="container">
                         <div class="slider">
@@ -23,7 +23,7 @@ function DogProfileCards(props) {
                         </div>
                     </div>
                     <div class='card_right__review'>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec eros maximus, feugiat tortor non, rutrum augue. In magna nibh, aliquet eu lorem cursus, lobortis maximus metus. Mauris euismod lobortis mauris, ut viverra purus hendrerit ac. Sed porta odio in magna eleifend, quis fermentum nunc scelerisque.</p>
+                        <p>{props.user.dogname[0].description}</p>
                     </div>
                     <div class='card_right__button'>
                         <i class='fas fa-paw' style="color:#f3c623;"></i>

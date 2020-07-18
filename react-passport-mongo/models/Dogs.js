@@ -17,6 +17,9 @@ const DogsSchema = new mongoose.Schema({
     //     data: Buffer,
     //     contentType: String
     // },
+    age: {
+        type: Number,
+    },
     breed: {
         type: String,
         trim: true

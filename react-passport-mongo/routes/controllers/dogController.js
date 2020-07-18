@@ -42,10 +42,11 @@ module.exports = {
         console.log(req.session);
         if(req.session.user){
         id = req.session.user._id;
-        const {dogname, breed, sex, weight, description} = req.body;
+        const {dogname, breed, age, sex, weight, description} = req.body;
         const dog = await Dog.create({
             dogname,
             breed,
+            age,
             sex,
             weight,
             description,

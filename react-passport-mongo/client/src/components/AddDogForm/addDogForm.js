@@ -13,11 +13,13 @@ export default class Adddog extends Component {
         this.onChangeWeight = this.onChangeWeight.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangePicture = this.onChangePicture.bind(this);
+        this.onChangeAge = this.onChangeAge.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             dogname: '',
             breed: '',
+            age: '',
             sex: '',
             weight: '',
             picture: '',
@@ -39,6 +41,9 @@ export default class Adddog extends Component {
     onChangeBreed(e) {
         this.setState({breed: e.target.value})
     };
+    onChangeAge(e) {
+        this.setState({age: e.target.value})
+    };
     onChangeSex(e) {
         this.setState({sex: e.target.value})
     };
@@ -58,6 +63,7 @@ export default class Adddog extends Component {
         dogAPI.create({
             dogname: this.state.dogname,
             breed: this.state.breed,
+            age: this.state.age,
             sex: this.state.sex,
             weight: this.state.weight,
             picture: this.state.picture,
@@ -69,7 +75,7 @@ export default class Adddog extends Component {
                 console.log(res.status);
                 this.props.setDog(res.data);
                 this.props.setUser(res.data);
-                console.log(res.data.dogname.picture);
+                console.log(res.data.dogname);
             }
         })
         .catch(err => {
@@ -129,6 +135,14 @@ export default class Adddog extends Component {
                         className='form-control'
                         value={this.state.breed}
                         onChange={this.onChangeBreed}
+                        />
+                    </label>
+                    <label> Age:
+                        <input 
+                        type='text'
+                        className='form-control'
+                        value={this.state.age}
+                        onChange={this.onChangeAge}
                         />
                     </label>
                     <label> Sex:
