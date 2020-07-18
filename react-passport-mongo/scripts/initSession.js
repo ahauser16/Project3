@@ -7,3 +7,4 @@ module.exports =  function(session, RedisStore, client){
       saveUninitialized: false
     })
   }
+
