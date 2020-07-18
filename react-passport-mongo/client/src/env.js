@@ -1,5 +1,5 @@
 
 export const myEnvVars = {
-    TRAVELTIMEAPPID:  'fdab903f',
-    TRAVELTIMEAPIKEY:  '1c8ac1f62579fba9b061125ee0710272'
+    TRAVELTIMEAPPID:  'dfc45614',
+    TRAVELTIMEAPIKEY:  '60cf6646c39e45a0de83a59baa00a57d'
 }

@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Map as LeafletMap, Marker, Popup, TileLayer } from 'react-leaflet';
 import GetRoute from '../../utils/GetRoute/GetRoute';
-import GetRadius from '../../utils/GetRadius/GetRadius';
-
-
-
-//shouldn't we import RouteArray into Map.js?  However, if we import RouteArray into App.js then props should waterfall down to Map.JS, correct?
+import L from 'react-leaflet';
+import { Polyline } from 'react-leaflet';
+// import GetRadius from '../../utils/GetRadius/GetRadius';
 
 export default function Map(props) {
 
     //Step1-retrieve user coords and update user's position on map
     //COMPLETE
     const [position, setPosition] = useState({ lat: .1, lng: -.1 });
+
+    const [position2, setPosition2] = useState({ lat: .1, lng: -.1 })
+
+    const [polyline, setPolyline] = useState([])
+
+    const [active, setActive] = useState(false)
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function (currentPosition) {
@@ -24,36 +28,49 @@ export default function Map(props) {
                 lat: currentPosition.coords.latitude,
                 lng: currentPosition.coords.longitude
             });
+            setPosition2({
+                lat: currentPosition.coords.latitude,
+                lng: currentPosition.coords.longitude
+            });
         });
     }, []
     )
 
-    function handleClick(e) {
-        //when there is any event (such as when a User clicks the screen) onClick's coords get passed through the GetRoute function that outputs the TTR response data which has the coords that get plotted using L.polyline.
-        var myRoute = GetRoute(e.latlng);
-        console.log(e.latlng);
-        // var myRadius = GetRadius(e.latlng)
-
-
-        // .then(res => res.json())
-        // .then(res => console.log(res.results[0].locations[0].properties[0].route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj))))
-        // .then(res => console.log(res))
-
-        // let properties = serverJson.results[0].locations[0].properties[0],
-    //     routeArray = properties.route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj));
-    //     console.log(routeArray);
-    //     polyline = L.polyline(routeArray, { color: "red" }).addTo(map);
-    //   map.fitBounds(polyline.getBounds());
-    //   L.marker(routeArray[routeArray.length - 1]).addTo(map)
-    //     .bindPopup(`Travel Time: ${travelTime}<br>Distance: ${distance}`)
-    //     .openPopup();
+    function handleRoutes(e) {
     
+        var serverJson;
+
+        var myRoute = GetRoute(position2, e.latlng)
+
+            .then(response => response.json())
+            .then(data => {
+
+                let properties = data.results[0].locations[0].properties[0].route.parts;
+
+                let routeArray = properties.map(route => route.coords).flat().map(routeObj => Object.values(routeObj));
+
+                let marker = <Marker positions={routeArray[routeArray.length - 1]} />;
+
+                setPolyline([...polyline, routeArray]);
+                setActive(true);
+                
+                // L.marker(routeArray[routeArray.length - 1]).addTo(map)
+                // .bindPopup(`Travel Time: ${travelTime}<br>Distance: ${distance}`)
+                // .openPopup();
+                
+                console.log(properties);
+            })
+
+        setPosition2(
+            e.latlng
+        )
+
+        // var myRadius = GetRadius(e.latlng)
     }
 
     return (
-        //step3-load the map, tilelayer and setview
-        //COMPLETE 
-        <LeafletMap viewport={{}} center={position} zoom={15} style={{ height: "500px" }} onClick={handleClick}
+       
+        <LeafletMap viewport={{}} center={position} zoom={15} style={{ height: "500px" }} onClick={handleRoutes}
         >
             <TileLayer
                 attribution="<a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
@@ -64,7 +81,8 @@ export default function Map(props) {
                 <Popup>Test</Popup>
             </Marker>
 
+            {active ? <Polyline color="blue" positions={polyline} /> : null}
+
         </LeafletMap>
-    
     )
 }

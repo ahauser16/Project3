@@ -24,10 +24,6 @@ import DogProfiles from './pages/DogProfiles';
 
 //====================================================================================
 
-// import RouteArray from './components/RouteArray/RouteArray';
-
-
-
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function App() {
