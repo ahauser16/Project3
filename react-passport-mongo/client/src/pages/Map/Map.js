@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Map as LeafletMap, Marker, Popup, TileLayer } from 'react-leaflet';
-import 'react-leaflet-fullscreen/dist/styles.css';
-import GetRoute from '../../utils/GetRoute/GetRoute'
+import GetRoute from '../../utils/GetRoute/GetRoute';
+import GetRadius from '../../utils/GetRadius/GetRadius';
 
 
-// import FullscreenControl from 'react-leaflet-fullscreen';
-// import iconUrl from './public/logo192.png';
-// import L from 'leaflet';
+
+//shouldn't we import RouteArray into Map.js?  However, if we import RouteArray into App.js then props should waterfall down to Map.JS, correct?
 
 export default function Map(props) {
 
@@ -30,12 +29,15 @@ export default function Map(props) {
     )
 
     function handleClick(e) {
+        //when there is any event (such as when a User clicks the screen) onClick's coords get passed through the GetRoute function that outputs the TTR response data which has the coords that get plotted using L.polyline.
+        var myRoute = GetRoute(e.latlng);
+        console.log(e.latlng);
+        // var myRadius = GetRadius(e.latlng)
 
-        
-        var myRoute = GetRoute(e.latlng)
-        .then(res => res.json())
+
+        // .then(res => res.json())
         // .then(res => console.log(res.results[0].locations[0].properties[0].route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj))))
-        .then(res => console.log(res))
+        // .then(res => console.log(res))
 
         // let properties = serverJson.results[0].locations[0].properties[0],
     //     routeArray = properties.route.parts.map(route => route.coords).flat().map(routeObj => Object.values(routeObj));
