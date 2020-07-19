@@ -1,0 +1,269 @@
+/* create the paw prints */
+@font-face {
+   font-family: 'Source Sans Pro';
+   font-style: normal;
+   font-weight: 200;
+   src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+ }
+ @font-face {
+   font-family: 'Source Sans Pro';
+   font-style: normal;
+   font-weight: 300;
+   src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+ }
+ * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-weight: 300;
+ }
+ body {
+   font-family: 'Source Sans Pro', sans-serif;
+   color: white;
+   font-weight: 300;
+ }
+ body ::-webkit-input-placeholder {
+   /* WebKit browsers */
+   font-family: 'Source Sans Pro', sans-serif;
+   color: white;
+   font-weight: 300;
+ }
+ body :-moz-placeholder {
+   /* Mozilla Firefox 4 to 18 */
+   font-family: 'Source Sans Pro', sans-serif;
+   color: white;
+   opacity: 1;
+   font-weight: 300;
+ }
+ body ::-moz-placeholder {
+   /* Mozilla Firefox 19+ */
+   font-family: 'Source Sans Pro', sans-serif;
+   color: white;
+   opacity: 1;
+   font-weight: 300;
+ }
+ body :-ms-input-placeholder {
+   /* Internet Explorer 10+ */
+   font-family: 'Source Sans Pro', sans-serif;
+   color: white;
+   font-weight: 300;
+ }
+ .wrapper {
+   background: #127681;
+   background: -webkit-gradient(linear, left top, right bottom, from(#127681), to(#10375c));
+   background: linear-gradient(to bottom right, #127681 0%, #10375c 100%);
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   overflow: auto;
+ }
+ .wrapper.form-success .container h1 {
+   -webkit-transform: translateY(85px);
+           transform: translateY(85px);
+ }
+ .container {
+   max-width: 600px;
+   margin: 0 auto;
+   padding: 80px 0;
+   height: 400px;
+   text-align: center;
+ }
+ .container h1 {
+   font-size: 40px;
+   -webkit-transition-duration: 1s;
+           transition-duration: 1s;
+   -webkit-transition-timing-function: ease-in-put;
+           transition-timing-function: ease-in-put;
+   font-weight: 200;
+ }
+ form {
+   padding: 20px 0;
+   position: relative;
+   z-index: 2;
+ }
+ form input {
+   -webkit-appearance: none;
+      -moz-appearance: none;
+           appearance: none;
+   outline: 0;
+   border: 1px solid rgba(255, 255, 255, 0.4);
+   background-color: rgba(255, 255, 255, 0.2);
+   width: 250px;
+   border-radius: 3px;
+   padding: 10px 15px;
+   margin: 0 auto 10px auto;
+   display: block;
+   text-align: center;
+   font-size: 18px;
+   color: white;
+   -webkit-transition-duration: 0.25s;
+           transition-duration: 0.25s;
+   font-weight: 300;
+ }
+ form input:hover {
+   background-color: rgba(255, 255, 255, 0.4);
+ }
+ form input:focus {
+   background-color: white;
+   width: 300px;
+   color: #f3c623;
+ }
+ form button {
+   -webkit-appearance: none;
+      -moz-appearance: none;
+           appearance: none;
+   outline: 0;
+   background-color: white;
+   border: 0;
+   padding: 10px 15px;
+   color: #10375c;
+   border-radius: 3px;
+   width: 250px;
+   cursor: pointer;
+   font-size: 18px;
+   -webkit-transition-duration: 0.25s;
+           transition-duration: 0.25s;
+ }
+ form button:hover {
+   background-color: #f3c623;
+ }
+ 
+ 
+ .pad {
+   width: 25px;
+   height: 27px;
+   background-color: #f3c623;
+   -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
+   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+   display: block;
+   position: absolute;
+ }
+ .large {
+   width: 70px;
+   height: 80px;
+   transform: rotate(80deg);
+   left: 100px;
+   top: 50px;
+ }
+ .small-1 {
+   transform: rotate(50deg);
+   left: 145px;
+   top: 28px;
+ }
+ .small-2 {
+   transform: rotate(65deg);
+   left: 174px;
+   top: 50px;
+ }
+ .small-3 {
+   transform: rotate(98deg);
+   position: absolute;
+   left: 178px;
+   top: 87px;
+ }
+ .small-4 {
+   transform: rotate(140deg);
+   position: absolute;
+   left: 158px;
+   top: 117px;
+ }
+ 
+ /* position and animate */
+ 
+ .paw-print-1 {
+   opacity: 0;
+   position: absolute;
+   left: 75px;
+   top: 300px;
+   transform: rotate(-40deg);
+   -webkit-animation: walk 3s linear infinite;
+   animation: /*keyframe*/ walk /*duration*/ 3s /*transition*/ linear /*repeat*/
+     infinite;
+ }
+ .paw-print-2 {
+   opacity: 0;
+   position: absolute;
+   left: 275px;
+   top: 280px;
+   transform: rotate(-5deg);
+   -webkit-animation: walk 3s linear infinite 0.25s;
+   animation: walk 3s linear infinite /*delay*/ 0.25s;
+ }
+ .paw-print-3 {
+   opacity: 0;
+   position: absolute;
+   left: 375px;
+   top: 130px;
+   transform: rotate(-10deg);
+   -webkit-animation: walk 3s linear infinite 0.5s;
+   animation: walk 3s linear infinite 0.5s;
+ }
+ .paw-print-4 {
+   opacity: 0;
+   position: absolute;
+   left: 575px;
+   top: 280px;
+   transform: rotate(-20deg);
+   -webkit-animation: walk 3s linear infinite 0.75s;
+   animation: walk 3s linear infinite 0.75s;
+ }
+ .paw-print-5 {
+   opacity: 0;
+   position: absolute;
+   left: 725px;
+   top: 50px;
+   transform: rotate(10deg);
+   -webkit-animation: walk 3s linear infinite 1s;
+   animation: walk 3s linear infinite 1s;
+ }
+ .paw-print-6 {
+   opacity: 0;
+   position: absolute;
+   left: 875px;
+   top: 200px;
+   transform: rotate(10deg);
+   -webkit-animation: walk 3s linear infinite 1.25s;
+   animation: walk 3s linear infinite 1.25s;
+ }
+ .paw-print-7 {
+   opacity: 0;
+   position: absolute;
+   left: 1075px;
+   top: 50px;
+   transform: rotate(20deg);
+   -webkit-animation: walk 3s linear infinite 1.5s;
+   animation: walk 3s linear infinite 1.5s;
+ }
+ .paw-print-8 {
+   opacity: 0;
+   position: absolute;
+   left: 1150px;
+   top: 250px;
+   transform: rotate(10deg);
+   -webkit-animation: walk 3s linear infinite 1.75s;
+   animation: walk 3s linear infinite 1.75s;
+ }
+ 
+ /* walking effect animation keyframes */
+ 
+ @-webkit-keyframes walk {
+   25% {
+     opacity: 1;
+   }
+   100% {
+     opacity: 0;
+   }
+ }
+ 
+ @keyframes walk {
+   /* appear */
+   25% {
+     opacity: 1;
+   }
+   /* disappear */
+   100% {
+     opacity: 0;
+   }
+ }
