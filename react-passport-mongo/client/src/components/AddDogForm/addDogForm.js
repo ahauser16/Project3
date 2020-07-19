@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {dog as dogAPI} from '../../utils/API';
+import style from './style.css';
 // import ImageUploader from "react-images-upload";
 
 
