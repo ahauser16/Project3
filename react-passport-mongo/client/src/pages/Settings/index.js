@@ -5,7 +5,7 @@ import Adddog from '../../components/AddDogForm/addDogForm';
 import { user } from '../../utils/API';
 import { Button } from '../../components/Button';
 import { Link } from 'react-router-dom';
-import style from './style.css';
+import './style.css';
 
 
 
