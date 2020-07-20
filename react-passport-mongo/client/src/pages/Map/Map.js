@@ -15,6 +15,8 @@ export default function Map(props) {
 
     const [polyline, setPolyline] = useState([])
 
+    const [marker, setMarker] = useState([])
+
     const [active, setActive] = useState(false)
 
     useEffect(() => {
@@ -37,7 +39,7 @@ export default function Map(props) {
     )
 
     function handleRoutes(e) {
-    
+        // e.preventDefault();
         var serverJson;
 
         var myRoute = GetRoute(position2, e.latlng)
@@ -49,16 +51,23 @@ export default function Map(props) {
 
                 let routeArray = properties.map(route => route.coords).flat().map(routeObj => Object.values(routeObj));
 
-                let marker = <Marker positions={routeArray[routeArray.length - 1]} />;
+                let lat = properties.slice(-1)[0].coords[1].lat;
+                let lng = properties.slice(-1)[0].coords[1].lng;
+
+                // console.log(properties);
+                // console.log(properties.slice(-1)[0].coords[0].lat);
+                // console.log(properties.slice(-1)[0].coords[0].lng);
 
                 setPolyline([...polyline, routeArray]);
                 setActive(true);
+
+                setMarker([...marker, ...[[lat, lng]]])
+
                 
                 // L.marker(routeArray[routeArray.length - 1]).addTo(map)
                 // .bindPopup(`Travel Time: ${travelTime}<br>Distance: ${distance}`)
                 // .openPopup();
-                
-                console.log(properties);
+
             })
 
         setPosition2(
@@ -68,20 +77,38 @@ export default function Map(props) {
         // var myRadius = GetRadius(e.latlng)
     }
 
+
+
+    const listItems = marker.map((item) =>
+        <Marker position={item}>
+            <Popup>Starting Position</Popup>
+        </Marker>
+    )
+    // console.log(marker);
+
+
+
     return (
-       
-        <LeafletMap viewport={{}} center={position} zoom={15} style={{ height: "500px" }} onClick={handleRoutes}
+
+        <LeafletMap
+            viewport={{}}
+            center={position}
+            zoom={15}
+            style={{ height: "500px" }}
+            onClick={handleRoutes}
         >
             <TileLayer
                 attribution="<a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            <Marker position={position}>
-                <Popup>Test</Popup>
+            <Marker position={position} >
+                <Popup>Starting Position</Popup>
             </Marker>
+            {listItems}
 
             {active ? <Polyline color="blue" positions={polyline} /> : null}
+            {/* {active ? <Marker color="red" positions={markerArray} /> : null} */}
 
         </LeafletMap>
     )

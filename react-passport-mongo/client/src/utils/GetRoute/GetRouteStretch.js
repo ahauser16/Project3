@@ -7,7 +7,7 @@ function getDateString() {
 
 
 
-export default function GetRoute(position) { 
+export default function GetRoute(position) {
     const apiKey = myEnvVars.TRAVELTIMEAPPID;
     const appid = myEnvVars.TRAVELTIMEAPIKEY
 
@@ -193,9 +193,9 @@ export default function GetRoute(position) {
             }
         ],
 
-    //data.departure_searches[0].arrival_location_ids.push("home"); //always go home after
-    // console.log(position.lat);
-    //     console.log(position.lng);
+        //data.departure_searches[0].arrival_location_ids.push("home"); //always go home after
+        // console.log(position.lat);
+        //     console.log(position.lng);
 
         return fetch("https://api.traveltimeapp.com/v4/routes", {
             method: "POST",

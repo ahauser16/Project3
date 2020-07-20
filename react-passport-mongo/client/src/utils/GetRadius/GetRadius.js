@@ -35,8 +35,9 @@ export default function RadiusCall(position) {
                 "transportation": {
                     "type": "walking"
                 },
-                "departure_time": getDateString(),
-                "travel_time": 900
+                "travel_time": 900,
+                "departure_time": getDateString()
+                
             }
         ],
         "arrival_searches": [
