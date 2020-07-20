@@ -3,6 +3,8 @@ import { Button } from '../../components/Button';
 import { Link, useLocation } from 'react-router-dom';
 import { user as userAPI } from '../../utils/API';
 import style from "./style.module.css";
+import Logo from "./pawWALK_Logo.png";
+import Settings from "./settingsIcon.png"
 
 const Navbar = props => {
 	const signout = () => {
@@ -24,32 +26,27 @@ const Navbar = props => {
 
 	return (
 		<div
-			style={{ padding: 4, color: 'white', lineHeight: '20px' }}
-			className='bg-success'
+			style={{ padding: 4, color: '#f3c623', lineHeight: '20px', backgroundColor: "#f3c62350" }}
 		>
 			<Link to='/'>
-				<div className={`${style.logo} btn`} >
-					Navbar
-				</div>
+				<img src={Logo} className={`btn`} ></img>
 			</Link>
-			{ props.user._id 
-				?  <Link to ='/settings'>
-						<div className={`${style.logo} btn`} >
-							Settings
-						</div>
-					</Link>
-				
-				:  <></>
+			{props.user._id
+				? <Link to='/settings'>
+					<img src={Settings} className={`btn`} ></img>
+				</Link>
+
+				: <></>
 			}
-			{ props.user._id 
-				?  <Button theme='dark' onClick={signout}><i className='fa fa-sign-out fa-1x' aria-hidden='true'></i></Button> 
-					
-				
-				:  location.pathname === '/signup' 
-					? 	<Link to='/login'><Button>login</Button></Link>
-					:  <Link to='/signup'><Button theme='primary'>Signup</Button></Link>
+			{props.user._id
+				? <Button theme='default' onClick={signout}><i className='fa fa-sign-out fa-1x' style={{color: '#f3c623', fontSize: '40px'}} aria-hidden='true'></i></Button>
+
+
+				: location.pathname === '/signup'
+					? <Link to='/login'><Button theme='default' style={{color: '#f3c623'}}>Login</Button></Link>
+					: <Link to='/signup'><Button theme='default' style={{color: '#f3c623'}}>Signup</Button></Link>
 			}
-			
+
 		</div>
 	);
 };
