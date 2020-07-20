@@ -27,11 +27,11 @@ class Signup extends Component {
 
 	handleFormSubmit = event => {
 		event.preventDefault();
-		this.props.setLoading(true);
+		// this.props.setLoading(true);
 
 		// validate all fields
 		if (!this.state.email || !this.state.password || !this.state.passwordConf) {
-			this.props.setLoading(false);
+			// this.props.setLoading(false);
 			// set error alert to user
 			return this.props.setAlertInfo({
 				theme: 'warning',
@@ -41,7 +41,7 @@ class Signup extends Component {
 
 		// validate pass === to pass confirmation.
 		if (this.state.password.trim() !== this.state.passwordConf.trim()) {
-			this.props.setLoading(false);
+			// this.props.setLoading(false);
 			// set error alert to user
 			return this.props.setAlertInfo({
 				theme: 'warning',
@@ -61,10 +61,10 @@ class Signup extends Component {
 				console.log(res);
 				if (res.status === 200) {
 					this.props.setUser(res.data);
-					this.props.setLoading(false);
+					// this.props.setLoading(false);
 					return <Redirect to='/home' />;
 				} else {
-					this.props.setLoading(false);
+					// this.props.setLoading(false);
 					this.props.setAlertInfo({
 						theme: 'warning',
 						message: res.response.data
@@ -72,7 +72,7 @@ class Signup extends Component {
 				}
 			})
 			.catch(err => {
-				this.props.setLoading(false);
+				// this.props.setLoading(false);
 				console.log(err.response.data);
 				this.props.setAlertInfo({ theme: 'warning', message: err.response.data });
 			});

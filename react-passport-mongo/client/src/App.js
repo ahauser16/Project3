@@ -10,6 +10,7 @@ import NoMatch from './pages/NoMatch';
 import Settings from './pages/Settings';
 import Alert from './components/Alert';
 import Navbar from './containers/Navbar';
+import Edit from './pages/EditDog/edit';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
 // import Map from './pages/Map';
@@ -30,7 +31,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 function App() {
 	//================================================
 	const [user, setUser] = useState({});
-	const [loading, setLoading] = useState(false);
+	// const [loading, setLoading] = useState(false);
 	const [alertInfo, setAlertInfo] = useState({message:"", theme:"success"});
 	const [dog, setDog] = useState({});
 
@@ -48,7 +49,7 @@ function App() {
 				<Route render={props =>
 					<Navbar user={user} setUser={setUser} {...props} />
 				} />
-				<LoadingSpinner isLoading={loading} />
+				{/* <LoadingSpinner isLoading={loading} /> */}
 				<Switch>
 					<Route
 						exact
@@ -56,7 +57,7 @@ function App() {
 						render={props => (
 							<Login
 								{...props}
-								{...{ user, setUser, setLoading, setAlertInfo }}
+								{...{ user, setUser, setAlertInfo }}
 							/>
 						)}
 					/>
@@ -80,11 +81,11 @@ function App() {
 								{...props}
 								user={user}
 								setUser={setUser}
-								setLoading={setLoading}
+								// setLoading={setLoading}
 								setAlertInfo={setAlertInfo}
 							/>
 						}
-						{...{ user, setUser, setLoading, setAlertInfo }} />
+						{...{ user, setUser, setAlertInfo }} />
 					{/* <ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } /> */}
 					<Route path="/settings"
 						render={props =>
@@ -113,7 +114,15 @@ function App() {
 								/>
 						}
 					/>
-
+					<Route 
+						exact path="/editDog"
+						render ={props =>
+							<Edit 
+								{...props}
+								user={user}
+								/>
+							}
+					/>
 					<Route component={NoMatch} />
 
 

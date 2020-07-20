@@ -26,7 +26,7 @@ class Login extends Component {
 			console.log(this.state.email);
 
 			// set loading state
-			this.props.setLoading(true);
+			// this.props.setLoading(true);
 
 			userAPI
 				.login({
@@ -36,7 +36,7 @@ class Login extends Component {
 				.then(res => {
 					if (res.status === 200) {
 						console.log(res.status);
-						this.props.setLoading(false);
+						// this.props.setLoading(false);
 						this.props.setUser(res.data);
 					}
 				})

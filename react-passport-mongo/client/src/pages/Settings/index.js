@@ -22,7 +22,7 @@ export default (props) => {
 						<Toggle title='Add Dog'>
 							<Adddog {...props}/>
 						</Toggle></button></li>
-						<li className='list-group-item'><button className='button'>Edit Dog Profile</button></li>
+						<li className='list-group-item'><Link to = '/editDog'><button className='button'>Edit Dog Profile</button></Link></li>
 						<li className='list-group-item'><Link to ='/dogprofiles'><button className='form button'>Dog Profile</button></Link></li>
 					</ul> 
 					
