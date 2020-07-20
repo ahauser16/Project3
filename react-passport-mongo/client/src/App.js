@@ -31,7 +31,7 @@ function App() {
 	//================================================
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(false);
-	const [alertInfo, setAlertInfo] = useState({message:"", theme:"success"});
+	const [alertInfo, setAlertInfo] = useState({ message: "", theme: "success" });
 	const [dog, setDog] = useState({});
 
 	useEffect(() => {
@@ -88,29 +88,29 @@ function App() {
 					{/* <ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } /> */}
 					<Route path="/settings"
 						render={props =>
-						<Settings 
-							{...props}
-							user={user}
-							setUser={setUser}
-							dog={dog}
-							setDog={setDog}
+							<Settings
+								{...props}
+								user={user}
+								setUser={setUser}
+								dog={dog}
+								setDog={setDog}
 							/>
-							}>
+						}>
 					</Route>
 					{/* <Route path="/"/> */}
 					{/* <ProtectedRoute exact path="/home" {...{user, loading, Component: Home} } /> */}
 
-					<Route exact path="/home" 
-						component={Map} 
+					<Route exact path="/home"
+						component={Map}
 					/>
-					<Route 
-						exact path = "/dogprofiles"
-						render ={props =>
-							<DogProfiles 
+					<Route
+						exact path="/dogprofiles"
+						render={props =>
+							<DogProfiles
 								{...props}
 								user={user}
 								dog={dog}
-								/>
+							/>
 						}
 					/>
 
