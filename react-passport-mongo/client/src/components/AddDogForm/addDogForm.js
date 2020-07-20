@@ -8,6 +8,7 @@ import './style.css';
 export default class Adddog extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
         this.onChangeDogname = this.onChangeDogname.bind(this);
         this.onChangeBreed = this.onChangeBreed.bind(this);
         this.onChangeSex = this.onChangeSex.bind(this);
@@ -119,7 +120,7 @@ export default class Adddog extends Component {
         return (
             <div className='formContainer'>
                 <form 
-                    className='form'
+                    className='addDog'
                     onSubmit={this.onSubmit}
                     action='/dogProfile'
                     method='post'

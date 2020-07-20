@@ -56,3 +56,6 @@ form input:hover {
 label {
     color: azure;
 }
+.addDog {
+	background: cadetblue;
+}
