@@ -1,3 +1,5 @@
+
+
 body .card-body {
 	width: 100%;
 	background: #10375c;
@@ -13,6 +15,17 @@ body .miniProfileFont {
 	font-weight: 400;
 	text-align: left;
 	font-size: 40px;
+	margin: 30px 0 0 0;
+	padding: 0 0 0 40px;
+	letter-spacing: 1px;
+}
+
+body .miniProfileFontSmall {
+	color: #f3c623;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	text-align: left;
+	font-size: 20px;
 	margin: 30px 0 0 0;
 	padding: 0 0 0 40px;
 	letter-spacing: 1px;
@@ -45,12 +58,12 @@ form input {
 form input:hover {
 	background-color: rgba(255, 255, 255, 0.4);
 }
-form input:focus {
+button :focus {
 	background-color: white;
 	width: 300px;
 	color: #f3c623;
 }
-form button {
+button {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -66,6 +79,9 @@ form button {
 	-webkit-transition-duration: 0.25s;
 	transition-duration: 0.25s;
 }
-form button:hover {
+button:hover {
 	background-color: #f3c623;
+}
+.button {
+    width: 100%;
 }

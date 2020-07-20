@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import styles from './style.module.css';
+import './style.css';
 import { user as userAPI } from '../../utils/API';
 import { Redirect } from 'react-router-dom';
-import { Col, Row, Container } from '../../components/Grid';
-import { Input, FormBtn } from '../../components/Form';
-import Card from '../../components/Card';
+import Navbar from '../../containers/Navbar/index';
+// import Route from 'react-router-dom';
 
 class Signup extends Component {
 	constructor(props) {
@@ -29,99 +28,175 @@ class Signup extends Component {
 	handleFormSubmit = event => {
 		event.preventDefault();
 		this.props.setLoading(true);
-    
-    // validate all fields
-    if (!this.state.email || !this.state.password || !this.state.passwordConf) {
-		  this.props.setLoading(false);
-      // set error alert to user
-      return this.props.setAlertInfo({theme:"warning", message:"Please fill all required fields"})
-    }
 
-    // validate pass === to pass confirmation.
-    if(this.state.password.trim() !== this.state.passwordConf.trim()) {
-		  this.props.setLoading(false);
-      // set error alert to user
-      return this.props.setAlertInfo({theme:"warning", message:"Your password fields do not match."})
-    }
+		// validate all fields
+		if (!this.state.email || !this.state.password || !this.state.passwordConf) {
+			this.props.setLoading(false);
+			// set error alert to user
+			return this.props.setAlertInfo({
+				theme: 'warning',
+				message: 'Please fill all required fields'
+			});
+		}
 
-    // if good to go
+		// validate pass === to pass confirmation.
+		if (this.state.password.trim() !== this.state.passwordConf.trim()) {
+			this.props.setLoading(false);
+			// set error alert to user
+			return this.props.setAlertInfo({
+				theme: 'warning',
+				message: 'Your password fields do not match.'
+			});
+		}
+
+		// if good to go
 		userAPI
-				.signup({
-					name: this.state.name.trim(),
-					email: this.state.email.trim(),
-					password: this.state.password.trim(),
-					passwordConf: this.state.passwordConf.trim()
-				})
-				.then(res => {
-					console.log(res);
-					if (res.status === 200) {
-						this.props.setUser(res.data);
-						this.props.setLoading(false);
-						return <Redirect to='/home' />;
-					} else {
-						this.props.setLoading(false);
-						this.props.setAlertInfo({
-							theme: 'warning',
-							message: res.response.data
-						});
-					}
-				})
-				.catch(err => {
+			.signup({
+				name: this.state.name.trim(),
+				email: this.state.email.trim(),
+				password: this.state.password.trim(),
+				passwordConf: this.state.passwordConf.trim()
+			})
+			.then(res => {
+				console.log(res);
+				if (res.status === 200) {
+					this.props.setUser(res.data);
 					this.props.setLoading(false);
-					console.log(err.response.data);
-					this.props.setAlertInfo({ theme: 'warning', message: err.response.data });
-				});
+					return <Redirect to='/home' />;
+				} else {
+					this.props.setLoading(false);
+					this.props.setAlertInfo({
+						theme: 'warning',
+						message: res.response.data
+					});
+				}
+			})
+			.catch(err => {
+				this.props.setLoading(false);
+				console.log(err.response.data);
+				this.props.setAlertInfo({ theme: 'warning', message: err.response.data });
+			});
 	};
 
 	render() {
 		return (
-			<Container fluid>
-				<Row>
-					<Col size='12'>
-						<Card title='Signup'>
-							<form className={styles.form} onSubmit={this.handleFormSubmit}>
-								<Input
-									value={this.state.name}
-									onChange={this.handleInputChange}
-									name='name'
-									placeholder='name (required)'
-								/>
-								<Input
-									value={this.state.email}
-									onChange={this.handleInputChange}
-									name='email'
-									placeholder='email (required)'
-								/>
-								<Input
-									value={this.state.password}
-									onChange={this.handleInputChange}
-									name='password'
-									placeholder='(required)'
-									type='password'
-								/>
-								<Input
-									value={this.state.passwordConf}
-									onChange={this.handleInputChange}
-									name='passwordConf'
-									placeholder='(required)'
-									type='password'
-								/>
+			<>
+				{/* <div className='wrapper'> */}
+					<div className='container'>
+						<form className='form' onSubmit={this.handleFormSubmit}>
+							<input
+								value={this.state.name}
+								onChange={this.handleInputChange}
+								name='name'
+								placeholder='Name'
+							/>
+							<input
+								value={this.state.email}
+								onChange={this.handleInputChange}
+								name='email'
+								placeholder='Email'
+							/>
+							<input
+								value={this.state.password}
+								onChange={this.handleInputChange}
+								name='password'
+								placeholder='Password'
+								type='password'
+							/>
+							<input
+								value={this.state.passwordConf}
+								onChange={this.handleInputChange}
+								name='passwordConf'
+								placeholder='Password'
+								type='password'
+							/>
 
-								<FormBtn
-									disabled={!(this.state.email && this.state.password && this.state.passwordConf)}
-									theme='primary'
-								>
-									signup
-								</FormBtn>
-							</form>
-						</Card>
-					</Col>
-				</Row>
-				{/* redirect on authenticated */}
-        { this.props.user && this.props.user._id 
-          ?  <Redirect to='/home' /> 
-          :  <div></div> }
-			</Container>
+							<button
+								disabled={
+									!(
+										this.state.email &&
+										this.state.password &&
+										this.state.passwordConf
+									)
+								}
+							>
+								signup
+							</button>
+						</form>
+					</div>
+
+					{/* redirect on authenticated */}
+					{this.props.user && this.props.user._id ? (
+						<Redirect to='/home' />
+					) : (
+						<div></div>
+					)}
+
+					<div className='paw-print-1'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-2'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-3'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-4'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-5'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-6'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-7'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+
+					<div className='paw-print-8'>
+						<div className='pad large'></div>
+						<div className='pad small-1'></div>
+						<div className='pad small-2'></div>
+						<div className='pad small-3'></div>
+						<div className='pad small-4'></div>
+					</div>
+				{/* </div> */}
+			</>
 		);
 	}
 }

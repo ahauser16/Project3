@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {dog as dogAPI} from '../../utils/API';
-import style from './style.css';
+import './style.css';
 // import ImageUploader from "react-images-upload";
 
 
@@ -117,8 +117,9 @@ export default class Adddog extends Component {
 
     render() {
         return (
-            <div>
+            <div className='formContainer'>
                 <form 
+                    className='form'
                     onSubmit={this.onSubmit}
                     action='/dogProfile'
                     method='post'
@@ -131,6 +132,7 @@ export default class Adddog extends Component {
                         onChange={this.onChangeDogname}
                         />
                     </label>
+                    <br></br>
                     <label> Breed:
                         <input 
                         type='text'
@@ -139,6 +141,7 @@ export default class Adddog extends Component {
                         onChange={this.onChangeBreed}
                         />
                     </label>
+                    <br></br>
                     <label> Age:
                         <input 
                         type='text'
@@ -147,6 +150,7 @@ export default class Adddog extends Component {
                         onChange={this.onChangeAge}
                         />
                     </label>
+                    <br></br>
                     <label> Sex:
                         <input 
                         type='text'
@@ -155,6 +159,7 @@ export default class Adddog extends Component {
                         onChange={this.onChangeSex}
                         />
                     </label>
+                    <br></br>
                     <label> Weight: 
                         <input 
                         type='text'
@@ -163,6 +168,7 @@ export default class Adddog extends Component {
                         onChange={this.onChangeWeight}
                         />
                     </label>
+                    <br></br>
                     {/* <label> Upload Image: 
                         <input 
                         type='file'
@@ -182,7 +188,7 @@ export default class Adddog extends Component {
                         />
                     </label>
                     {/* input for image */}
-                    <input type='submit' value='Add Dog' className='btn btn-success'/>
+                    <input type='submit' value='Add Dog' className='formbutton'/>
                 </form>
             </div>
         )
