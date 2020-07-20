@@ -53,11 +53,12 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className="wrapper">
+		<>
+			{/* <div className="wrapper"> */}
 				<div className="container">
 					<h1>Welcome</h1>
 
-					<form className="form" onSubmit={this.handleFormSubmit}>
+					<form onSubmit={this.handleFormSubmit}>
 						<input type="text" placeholder="Email" value={this.state.email} onChange={this.handleInputChange}
 							name='email' />
 						<input type="password" placeholder="Password" value={this.state.password}
@@ -134,7 +135,8 @@ class Login extends Component {
 				{/* Redirect on authentication */}
 				{this.props.user && this.props.user._id ?
 					<Redirect to='/home' /> : <></>}
-			</div>
+			{/*  </div> */}
+			</>
 		);
 	}
 }

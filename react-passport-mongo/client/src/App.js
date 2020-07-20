@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Map from './pages/Map/Map';
+import '../src/pages/Login/style.css'
 //==================================================================================
 import { user as userAPI } from "./utils/API";
 import Login from './pages/Login';
@@ -42,7 +43,7 @@ function App() {
 	//================================================
 
 	return (
-		<>
+		<div className='wrapper'>
 			<Router>
 				<Route render={props =>
 					<Navbar user={user} setUser={setUser} {...props} />
@@ -127,7 +128,7 @@ function App() {
 
 			{/* <TravelTimeRadiusCall /> */}
 
-		</>
+		</div>
 	);
 }
 
