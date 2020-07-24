@@ -12,7 +12,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
 // import Home from './pages/Home';
 //==================================================================================
-import TravelTimeRouteCall from './components/TravelTimeRouteCall/TravelTimeRouteCall'
+// import TravelTimeRouteCall from './components/TravelTimeRouteCall/TravelTimeRouteCall'
 
 //===================================================================================
 import './App.css';
@@ -57,10 +57,10 @@ function App() {
 						path='/login'
 						render={() => <Redirect to="/" />}
 					/>
-					<Route
+					{/* <Route
 						path='/traveltime'
-						component={TravelTimeRouteCall}
-					/>
+						component={TravelTimeRouteCall} */}
+					{/* /> */}
 					{/* <Route
 						path='/traveltime'
 						component={TravelTimeRadiusCall}
@@ -92,7 +92,7 @@ function App() {
 				: <></>
 			}
 
-			<TravelTimeRouteCall />
+			{/* <TravelTimeRouteCall /> */}
 
 			{/* <TravelTimeRadiusCall /> */}
 

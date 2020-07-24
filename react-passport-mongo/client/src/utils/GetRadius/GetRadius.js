@@ -5,7 +5,7 @@ function getDateString() {
     return d.toISOString();
 }
 
-export default function RadiusCall(position) {
+export default function GetRadius(position1) {
     const apiKey = myEnvVars.TRAVELTIMEAPPID;
     const appid = myEnvVars.TRAVELTIMEAPIKEY
 
@@ -29,8 +29,8 @@ export default function RadiusCall(position) {
             {
                 "id": "walking to work",
                 "coords": {
-                    "lat": position.lat,
-                    "lng": position.lng
+                    "lat": position1.lat,
+                    "lng": position1.lng
                 },
                 "transportation": {
                     "type": "walking"
@@ -39,25 +39,25 @@ export default function RadiusCall(position) {
                 "departure_time": getDateString()
                 
             }
-        ],
-        "arrival_searches": [
-            {
-                "id": "walking home",
-                "coords": {
-                    "lat": position.lat,
-                    "lng": position.lng
-                },
-                "transportation": {
-                    "type": "walking"
-                },
-                "arrival_time": getDateString(),
-                "travel_time": 900,
-                "range": {
-                    "enabled": false,
-                    "width": 3600
-                }
-            }
         ]
+        // "arrival_searches": [
+        //     {
+        //         "id": "walking home",
+        //         "coords": {
+        //             "lat": position.lat,
+        //             "lng": position.lng
+        //         },
+        //         "transportation": {
+        //             "type": "walking"
+        //         },
+        //         "arrival_time": getDateString(),
+        //         "travel_time": 900,
+        //         "range": {
+        //             "enabled": false,
+        //             "width": 3600
+        //         }
+        //     }
+        // ]
     };
     //================================================
     // async function fetchData(url, data, params) {
@@ -71,8 +71,6 @@ export default function RadiusCall(position) {
         method: "POST",
         headers: headers2,
         body: JSON.stringify(data)
-    }).catch(console.error)
-        .then(response => response.json())
-        .then(data => console.log(data));
+    })
 
 }

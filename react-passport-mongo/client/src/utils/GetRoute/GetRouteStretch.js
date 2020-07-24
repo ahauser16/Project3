@@ -28,7 +28,21 @@ export default function GetRoute(position) {
 
 
     // ==========================================================
-    // Currently the mvp allows the User to drop a marker creating a route from A (User's geolocation) -> (marker drop) B.  Immediately after the marker-B drop a POST request is sent to travelTimeRoutes with A & B's coordinates.  TTR sends response back with coordinates between A&B (TTR refers to each pair as PARTS) that can be plotted onto the map.  The response also contains directions, travel time, distance and a polyline on the map between markers A and B.  The coords from geolocation and TTR RESPONSE are added to RouteArray which will be passed into L.polyine() which will plot the route on the map.  The DATA from geolocation and TTR RESPONSE are saved to the DB.
+//So the user's entry point on the map is detected through the geolocation/getcurrentlocation method.  Then they can click on the map which plots a route and returns data containing the distance and travel time for that route and even the directions, distance&traveltime for each leg of the route.  They can then create a route from A to B, C, D, etc.  
+
+
+
+
+//feature works when the user clicks on the map that plans a route to that location.  three elements: .  When the page loads the user's location is detected through geolocation.getcurrentlocation method.  After the page loads the user's current location is added to an otherwise empty array.
+
+//When the user clicks on the map
+
+    // So the user's entry point to the map is the user's current location.
+    
+    
+    
+    which allows the User to drop a create a route starting from the User's geolocation a/k/a "A"
+    // -> (marker drop) B.  Immediately after the marker-B drop a POST request is sent to travelTimeRoutes with A & B's coordinates.  TTR sends response back with coordinates between A&B (TTR refers to each pair as PARTS) that can be plotted onto the map.  The response also contains directions, travel time, distance and a polyline on the map between markers A and B.  The coords from geolocation and TTR RESPONSE are added to RouteArray which will be passed into L.polyine() which will plot the route on the map.  The DATA from geolocation and TTR RESPONSE are saved to the DB.
     //
     //NOTE: the TTR RESPONSE has a lot of useable data that can be accessed to improve current features or create new feature.
     //

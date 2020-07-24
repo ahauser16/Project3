@@ -7,8 +7,6 @@ import { Polyline } from 'react-leaflet';
 
 export default function Map(props) {
 
-    //Step1-retrieve user coords and update user's position on map
-    //COMPLETE
     const [position, setPosition] = useState({ lat: .1, lng: -.1 });
 
     const [position2, setPosition2] = useState({ lat: .1, lng: -.1 })
@@ -38,9 +36,13 @@ export default function Map(props) {
     }, []
     )
 
+    // var myRadius = GetRadius(position1);
+
+
     function handleRoutes(e) {
-        // e.preventDefault();
         var serverJson;
+
+        
 
         var myRoute = GetRoute(position2, e.latlng)
 
@@ -57,34 +59,22 @@ export default function Map(props) {
                 // console.log(properties);
                 // console.log(properties.slice(-1)[0].coords[0].lat);
                 // console.log(properties.slice(-1)[0].coords[0].lng);
-
                 setPolyline([...polyline, routeArray]);
                 setActive(true);
-
                 setMarker([...marker, ...[[lat, lng]]])
-
-                
-                // L.marker(routeArray[routeArray.length - 1]).addTo(map)
-                // .bindPopup(`Travel Time: ${travelTime}<br>Distance: ${distance}`)
-                // .openPopup();
-
             })
-
         setPosition2(
             e.latlng
         )
-
-        // var myRadius = GetRadius(e.latlng)
+    
+    
     }
 
-
-
-    const listItems = marker.map((item) =>
+    const listMarkers = marker.map((item) =>
         <Marker position={item}>
             <Popup>Starting Position</Popup>
         </Marker>
     )
-    // console.log(marker);
 
 
 
@@ -105,7 +95,7 @@ export default function Map(props) {
             <Marker position={position} >
                 <Popup>Starting Position</Popup>
             </Marker>
-            {listItems}
+            {listMarkers}
 
             {active ? <Polyline color="blue" positions={polyline} /> : null}
             {/* {active ? <Marker color="red" positions={markerArray} /> : null} */}

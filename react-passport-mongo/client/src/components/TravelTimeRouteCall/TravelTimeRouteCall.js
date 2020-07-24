@@ -1,40 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { myEnvVars } from '../../env';
+// import axios from 'axios';
+// import { myEnvVars } from '../../env';
 
 
-function getDateString() {
-    let d = new Date();
-    return d.toISOString();
-}
+// function getDateString() {
+//     let d = new Date();
+//     return d.toISOString();
+// }
 
 export default function TravelTimeRouteCall(position) {
 
-console.log(position.lat);
-console.log(position.lng)
+// console.log(position.lat);
+// console.log(position.lng)
 
-    const [posts, setPosts] = useState([]);
+//     const [posts, setPosts] = useState([]);
 
-    const myTravelData = {
-        "locations": [
-            {
-                "id": "home",
-                "coords": {
-                    //ISSUE: cannot properly reference geolocation.  How would you reference lat&lng here as the values in Map.js-lines 21&22                    
-                    "lat": position.lat,
-                    "lng": position.lng
-                }
-            },
-        ],
-        "departure_searches": [{
-            "id": "WhereWoof",
-            "departure_location_id": "home",
-            "arrival_location_ids": [],
-            "transportation": { "type": "walking" },
-            "departure_time": getDateString(),
-            "properties": ["travel_time", "distance", "route"]
-        }]
-    };
+//     const myTravelData = {
+//         "locations": [
+//             {
+//                 "id": "home",
+//                 "coords": {
+//                     //ISSUE: cannot properly reference geolocation.  How would you reference lat&lng here as the values in Map.js-lines 21&22                    
+//                     "lat": position.lat,
+//                     "lng": position.lng
+//                 }
+//             },
+//         ],
+//         "departure_searches": [{
+//             "id": "WhereWoof",
+//             "departure_location_id": "home",
+//             "arrival_location_ids": [],
+//             "transportation": { "type": "walking" },
+//             "departure_time": getDateString(),
+//             "properties": ["travel_time", "distance", "route"]
+//         }]
+//     };
     //===================new code below===================
     // arrivalLatLngs.forEach((point, index) => {
     //     let id = "arrival" + index;
@@ -52,24 +52,24 @@ console.log(position.lng)
     //===================old code below======================
 
 
-    async function fetchData(url, data, params) {
-        const response = await axios.post(url, data, params);
-        console.log(response.data.results)
-        return response.data.results
-    }
+    // async function fetchData(url, data, params) {
+    //     const response = await axios.post(url, data, params);
+    //     console.log(response.data.results)
+    //     return response.data.results
+    // }
 
     //DRAWROUTE FUNCTION WOULD RUN AT THIS POINT
 
-    useEffect(() => {
-        let url = 'https://api.traveltimeapp.com/v4/routes'
-        const params = {
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'X-Application-Id': myEnvVars.TRAVELTIMEAPPID,
-                'X-Api-Key': myEnvVars.TRAVELTIMEAPIKEY
-            }
-        }
+    // useEffect(() => {
+    //     let url = 'https://api.traveltimeapp.com/v4/routes'
+    //     const params = {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Accept: 'application/json',
+    //             'X-Application-Id': myEnvVars.TRAVELTIMEAPPID,
+    //             'X-Api-Key': myEnvVars.TRAVELTIMEAPIKEY
+    //         }
+    //     }
 
         // commented out below to avoid unnecessary api calls
 
@@ -84,7 +84,7 @@ console.log(position.lng)
 
         // commented out above to avoid unnecessary api calls
 
-    }, [])
+    // }, [])
 
     return (
         <div>

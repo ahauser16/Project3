@@ -17,8 +17,8 @@ export default function GetRoute(position1, position2) {
         "Accept": "application/json",
         "X-Application-Id": appid,
         "X-Api-Key": apiKey
-
     });
+
     const headers2 = {
         "Host": "api.traveltimeapp.com",
         "Content-Type": "application/json",
@@ -68,8 +68,4 @@ export default function GetRoute(position1, position2) {
         headers: headers2,
         body: JSON.stringify(data)
     })
-   
-
-
 }
-//===============END OF GET ROUTE POST REQUEST=========================
