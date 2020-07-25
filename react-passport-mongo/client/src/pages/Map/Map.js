@@ -58,6 +58,7 @@ export default function Map(props) {
                 // .bindPopup(`Travel Time: ${travelTime}<br>Distance: ${distance}`)
                 // .openPopup();
                 
+                console.log(data);
                 console.log(properties);
             })
 
