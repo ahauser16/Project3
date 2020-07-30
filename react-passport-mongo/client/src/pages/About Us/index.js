@@ -26,8 +26,8 @@ export default (props) => {
                     <div className="data">
                         <h2>Arthur Hauser</h2>
                         <i>Developer</i>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Etiam sedesmi. Consectetur elit placerat mollis donec dolor.</p>
-                        <a href="#" class="fa fa-github"></a>
+                        <p>“Dogs are not our whole life, but they make our lives whole.”  — Roger Caras</p>
+                        <a href="www.linkedin.com/in/arthur-hauser" class="www.linkedin.com/in/arthur-hauser"></a>
                         <a href="#" class="fa fa-linkedin"></a>
                         <a href="#" class="fa fa-globe"></a>
                     </div>

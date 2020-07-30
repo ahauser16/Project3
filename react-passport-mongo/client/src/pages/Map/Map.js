@@ -71,7 +71,7 @@ export default function Map(props) {
 
     return (
        
-        <LeafletMap viewport={{}} center={position} zoom={15} style={{ height: "500px" }} onClick={handleRoutes}
+        <LeafletMap viewport={{}} center={position} zoom={15} style={{ height: "100vh", width: "100%" }} onClick={handleRoutes}
         >
             <TileLayer
                 attribution="<a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"

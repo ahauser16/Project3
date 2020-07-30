@@ -43,12 +43,15 @@ function App() {
 	//================================================
 
 	return (
-		<div className='wrapper'>
+		
+		// <div className='wrapper'>
+		<div>
 			<Router>
 				<Route render={props =>
 					<Navbar user={user} setUser={setUser} {...props} />
 				} />
 				<LoadingSpinner isLoading={loading} />
+				
 				<Switch>
 					<Route
 						exact
