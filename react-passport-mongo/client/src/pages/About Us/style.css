@@ -1,0 +1,247 @@
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+  }
+  /* .wrapper {
+    background: #127681;
+    background: -webkit-gradient(linear, left top, right bottom, from(#127681), to(#10375c));
+    background: linear-gradient(to bottom right, #127681 0%, #10375c 100%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+  } */
+  
+  h1{
+    text-align:center;
+    font-family:'Source Sans Pro', sans-serif;
+    font-size:3em;
+    color:#f3c623
+  }
+  #team{
+    display:flex;
+    flex-wrap: wrap;
+    flex-grow:3;
+  }
+  .card {
+    width:33%;
+    min-width: 250px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    margin:0 0.5% 1% 0;
+    display:inline-block;
+    /* border-radius: 50%; */
+  }
+  .card:nth-of-type(3n){
+    margin-right:0;
+  }
+  .card img {
+    width: 100%;
+    min-height:100%;
+    transition:all 0.9s
+  }
+  .card:hover img{
+   transform:scale(1.2,1.2)
+  }
+  .data {
+    position: absolute;
+    bottom: 5%;
+    background: #fff;
+    text-align:center;
+    width: 90%;
+    height: 80px;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 10px 5%;
+    box-sizing: border-box;
+    opacity: 0.8;
+    transition: all 0.4s
+  }
+  
+  .card:hover .data {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    opacity: 0.9;
+    padding:90px 10%
+  }
+  
+  .data h2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0 0 5px 0;
+    transition:color 0.4s
+  }
+  
+  .data p {
+    font-family: 'Source Sans Pro', sans-serif;
+    opacity: 0;
+    text-align:justify;
+    transition: all 0.2s
+  }
+  
+  .card:hover .data p,.card:hover .data a {
+    opacity: 1
+  }
+  
+  .data a{
+    color:#333;
+    text-decoration:none;
+    padding:20px;
+    opacity:0
+  }
+  .data a:hover,.card:hover h2{
+    color:#f3c623
+  }
+  
+  @media (max-width:799px){
+    .card {width:100%;margin-right:0}
+  }
+  
+  
+  .pad {
+    width: 25px;
+    height: 27px;
+    background-color: #f3c623;
+    -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    display: block;
+    position: absolute;
+  }
+  .large {
+    width: 70px;
+    height: 80px;
+    transform: rotate(80deg);
+    left: 100px;
+    top: 50px;
+  }
+  .small-1 {
+    transform: rotate(50deg);
+    left: 145px;
+    top: 28px;
+  }
+  .small-2 {
+    transform: rotate(65deg);
+    left: 174px;
+    top: 50px;
+  }
+  .small-3 {
+    transform: rotate(98deg);
+    position: absolute;
+    left: 178px;
+    top: 87px;
+  }
+  .small-4 {
+    transform: rotate(140deg);
+    position: absolute;
+    left: 158px;
+    top: 117px;
+  }
+  
+  .paw-print-1 {
+    opacity: 0;
+    position: absolute;
+    left: 75px;
+    top: 300px;
+    transform: rotate(-40deg);
+    -webkit-animation: walk 3s linear infinite;
+    animation: /*keyframe*/ walk /*duration*/ 3s /*transition*/ linear /*repeat*/
+      infinite;
+  }
+  .paw-print-2 {
+    opacity: 0;
+    position: absolute;
+    left: 275px;
+    top: 280px;
+    transform: rotate(-5deg);
+    -webkit-animation: walk 3s linear infinite 0.25s;
+    animation: walk 3s linear infinite /*delay*/ 0.25s;
+  }
+  .paw-print-3 {
+    opacity: 0;
+    position: absolute;
+    left: 375px;
+    top: 130px;
+    transform: rotate(-10deg);
+    -webkit-animation: walk 3s linear infinite 0.5s;
+    animation: walk 3s linear infinite 0.5s;
+  }
+  .paw-print-4 {
+    opacity: 0;
+    position: absolute;
+    left: 575px;
+    top: 280px;
+    transform: rotate(-20deg);
+    -webkit-animation: walk 3s linear infinite 0.75s;
+    animation: walk 3s linear infinite 0.75s;
+  }
+  .paw-print-5 {
+    opacity: 0;
+    position: absolute;
+    left: 725px;
+    top: 50px;
+    transform: rotate(10deg);
+    -webkit-animation: walk 3s linear infinite 1s;
+    animation: walk 3s linear infinite 1s;
+  }
+  .paw-print-6 {
+    opacity: 0;
+    position: absolute;
+    left: 875px;
+    top: 200px;
+    transform: rotate(10deg);
+    -webkit-animation: walk 3s linear infinite 1.25s;
+    animation: walk 3s linear infinite 1.25s;
+  }
+  .paw-print-7 {
+    opacity: 0;
+    position: absolute;
+    left: 1075px;
+    top: 50px;
+    transform: rotate(20deg);
+    -webkit-animation: walk 3s linear infinite 1.5s;
+    animation: walk 3s linear infinite 1.5s;
+  }
+  .paw-print-8 {
+    opacity: 0;
+    position: absolute;
+    left: 1150px;
+    top: 250px;
+    transform: rotate(10deg);
+    -webkit-animation: walk 3s linear infinite 1.75s;
+    animation: walk 3s linear infinite 1.75s;
+  }
+  
+  /* walking effect animation keyframes */
+  
+  @-webkit-keyframes walk {
+    25% {
+      opacity: .3;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes walk {
+    /* appear */
+    25% {
+      opacity: .3;
+    }
+    /* disappear */
+    100% {
+      opacity: 0;
+    }
+  }
